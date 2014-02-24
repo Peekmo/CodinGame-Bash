@@ -8,8 +8,7 @@ line=${line//[^a-zA-Z]/@}
 IFS=''
 declare -a letters
 
-for ((i=0; i<$height; i++))
-do
+for ((i=0; i<$height; i++)); do
     read -r letters[i]
 done
 
