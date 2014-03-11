@@ -1,5 +1,3 @@
-# To finish
-
 read r
 read l
 
@@ -9,19 +7,20 @@ for((i=1 ; i<$((l)) ; i++)); do
     line=""
     declare -a nums
     last=${numbers[0]}; nbre=1
-    for i in ${numbers[@]}; do
-        if [[ $((i)) -eq ${#numbers[*]} ]]; then
+    for ((x=0; x<${#numbers[*]}; x++)); do
+        if [[ $((x)) -eq $((${#numbers[*]}-1)) ]]; then
             nums[${#nums[*]}]=$nbre; 
             nums[${#nums[*]}]=$last; 
-        elif [[ $i -eq $last ]]; then nbre+=1
+        elif [[ ${numbers[$((x+1))]} -eq $last ]]; then nbre=$((nbre+1))
         else 
             nums[${#nums[*]}]=$nbre; 
             nums[${#nums[*]}]=$last; 
-            last=$i; 
+            last=${numbers[$((x+1))]}; 
             nbre=1
         fi
     done
-    echo $line
     line=$(IFS=" "; echo ${nums[@]})
+    unset nums
 done
 echo $line
+
